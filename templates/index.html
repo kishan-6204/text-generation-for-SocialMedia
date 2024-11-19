@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Generation for Social Media</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Text Generation for Social Media</h1>
+        <p>Generate engaging social media content with GPT-2.</p>
+
+        <form id="generateForm">
+            <label for="prompt">Enter a prompt:</label>
+            <textarea id="prompt" name="prompt" rows="4" cols="50" placeholder="Type something here..."></textarea>
+            <br><br>
+            <label for="maxLength">Max Length:</label>
+            <input type="number" id="maxLength" name="maxLength" value="50" min="10" max="100">
+            <br><br>
+            <button type="submit">Generate Text</button>
+        </form>
+
+        <div id="output">
+            <h3>Generated Text:</h3>
+            <p id="generatedText">Your generated text will appear here...</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const prompt = document.getElementById('prompt').value;
+            let maxLength = document.getElementById('maxLength').value;
+    
+            // Ensure maxLength is an integer
+            maxLength = parseInt(maxLength, 10);
+    
+            // Check if maxLength is a valid number
+            if (isNaN(maxLength)) {
+                alert("Please enter a valid number for Max Length.");
+                return;
+            }
+    
+            fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    max_length: maxLength
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('generatedText').textContent = data.generated_text;
+                } else {
+                    document.getElementById('generatedText').textContent = 'Error: ' + data.message;
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
