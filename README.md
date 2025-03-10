@@ -6,39 +6,59 @@ An AI-powered text generation system that creates engaging social media content 
 
 Features
 
-AI-based text generation for social media.
+AI-based Text Generation: Generates social media posts using GPT-2.
 
-Uses GPT-2 for natural language generation.
+Custom Prompt Support: Users can input a prompt for specific content generation.
 
-Flask API for integration.
+Flask API: Provides an API endpoint for easy integration.
 
-Supports custom prompts and text lengths.
+Configurable Output Length: Allows users to define the maximum length of generated text.
+
+Optimized for Social Media: Ensures engaging and relevant content.
 
 Installation
 
+To set up the project, follow these steps:
+
+# Clone the repository
+git clone https://github.com/yourusername/text-generation-social-media.git
+cd text-generation-social-media
+
+# Install dependencies
 pip install -r requirements.txt
 
 Usage
 
-Run the application:
+Running the Application
 
 python app.py
 
-API Endpoint:
+API Endpoint
 
 POST /generate
 
-Request: JSON { "prompt": "Your input text", "max_length": 50 }
+Request:
 
-Response: JSON { "generated_text": "Generated output text" }
+{
+  "prompt": "Your input text",
+  "max_length": 50
+}
+
+Response:
+
+{
+  "generated_text": "Generated output text"
+}
 
 Dependencies
 
-Flask
+The following libraries are required to run the project:
 
-Transformers (Hugging Face)
+Flask - Web framework for API handling.
 
-Torch
+Transformers (Hugging Face) - Provides pre-trained models for text generation.
+
+Torch - Deep learning framework used by Transformers.
 
 File Structure
 
@@ -49,13 +69,23 @@ File Structure
 ├── README.md       # Project documentation
 └── requirements.txt # Dependencies
 
+Configuration
+
+You can customize the text generation settings in generator.py by modifying:
+
+Model Selection: Change 'gpt2' to another Hugging Face model.
+
+Max Length: Adjust the max_length parameter for different output sizes.
+
 Future Enhancements
 
-Improve response quality using GPT-3.5.
+Upgrade to GPT-3.5: Improve text generation quality.
 
-Integrate with real-time social media APIs.
+Integrate with Social Media APIs: Automate content posting.
 
-Add sentiment-based content filtering.
+Sentiment-Based Content Filtering: Ensure relevant and appropriate text.
+
+User Authentication: Store and manage custom generated posts.
 
 Contributors
 
@@ -64,4 +94,3 @@ Contributors
 License
 
 This project is licensed under the MIT License.
-
